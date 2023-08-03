@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('assets/MicrosoftTeams-image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.btnAlarm {
+  width: 35px;
+  height: 35px;
+  color: #000;
+  background-color:transparent;
+  border: #ccc solid 1 px;
+  font-size: 14px;
+  border:none;
+  position:absolute;
+  top:1%;
+  left:1%; 
+  transition:1s ease-in;
+  cursor:pointer;
+
+}
+
+.btnClose{
+    width: 35px;
+    height: 35px;
+    color: #000;
+    background-color:transparent;
+    border: #ccc solid 1 px;
+    font-size: 14px;
+    border:none;
+    position:absolute;
+    top:1%;
+    right:1%; 
+    transition:1s ease-in;
+    cursor:pointer;
+
+
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.row {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    top: 25%;
+    left: 40%;
+    border: 0.5px solid rgb(186, 185, 185);
+    border-radius: 10px;
+   
+    
+}
+
+label{
+    color: #f0f0f0;
+    font-size: 20px;
+}
+
+.clock:nth-child(2) {
+    content: "";
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6f0%;
+    backdrop-filter: blur(5px);
+    z-index: -1;
+}
+
+#clock {
+    color: rgb(23, 251, 23);
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 5.5px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    top: 30%;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.8)));
+}
+
+.clockSettings{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    top: 10%;
+    right: 10%;
+    z-index: -1;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input-container input[type="time"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .input-container button {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .input-container button:hover {
+    background-color: #45a049;
+  }
+
+  .openAlarmList{
+    display: none;
+    width: 350px;
+    height: 100%;
+    transition: margin-left 2s ease-in-out;
+    transition-duration: 3s, 1s;transition-property: margin-right, color;
+    background: transparent;
+    padding:5px;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition:  1s ease-out, max-height 1s ease-out; /* Geçişlerin eklenmesi */
+    overflow-y: scroll;
+  }
+
+  #alarmList {
+    margin-top: 10px;
+    padding: 0;
+    width: 100%;
+    height: 30px;
+    list-style-type: none;
+    
+  }
+
+  #alarmList li {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  .clockList{
+    transition:1s ease-in;
+  }
+  /* Geri sayım still ayarları */
+  .count-down {
+    width: 300px;
+    height: 65px;
+    padding: 10px;
+    background-color: #F0F0F0BC;
+    border-radius: 8px;
+    letter-spacing:1.5px;
+    font-size: 15px;
+    font-weight: bold;
+    color:#000;
+    overflow-wrap: break-word;
+    margin-bottom:5px;
+    white-space:normal;
+    box-shadow: 3px 3px #23D429, -1em 0 .4em ;    
+  }
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+.delete-icon{
+  width:30px;
+  height:30px;
+  background:transparent;
+}
+
+.delete-timer{
+  width:30px;
+  height:30px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+}
+
+/* Alarmın Popup açılan sayfanın still ayarları*/
+/* Pop-up arka planı */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Arka plana yarı şeffaflık eklemek için */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Başlangıçta popupı gizliyoruz */
+  transition: opacity 0.5s ease; /* Geçiş efekti için opacity değerini değiştiriyoruz */
+}
+
+/* Pop-up açık durumu */
+#overlay.open {
+  opacity: 1; /* Açık durumda popupı görünür yapıyoruz */
+}
+
+/* Pop-up içeriği */
+#popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width:300px;
+  height:200px;
+  font-weight:bold;
+  transition:1s ease-in-out;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.btnPopup{
+  width:60px;
+  height:35px;
+  background:#000;
+  color:#fff;
+  position:fixed;
+  margin-top:100px;
+  margin-left:-25px;
+  transition:1s ease-in-out;
+
+  
+}
+
+.imgClose{
+    width:35px;
+    height:35px;
+    background:transparent;
+    border:none;
+}
+
+
+/* .hidden {
+  display: none;
+}
+
+#showMoreButton {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#showMoreButton:hover {
+  background-color: #0056b3;
+} */

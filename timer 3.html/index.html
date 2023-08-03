@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <title>Timer</title>
+  </head>
+
+  <body onload="showTime()">
+    <div class="container">
+      <button
+        type="button"
+        class="btnAlarm"
+        id="btnAlarm"
+        onclick="openAlarmList()"
+      >
+        <img class="imgClose" src="assets/alarm.png" alt="alarm " />
+      </button>
+      <div class="row">
+        <div class="clock" id="clock"></div>
+        <div class="clock"></div>
+      </div>
+      <div class="clockSettings">
+        <label for="alarmInput">Alarm Saati</label>
+        <div class="input-container">
+          <input
+            type="datetime-local"
+            id="alarmInput"
+            pattern="(0?[1-9]|1[0-2])\/(0?[1-9]|1\d|2\d|3[01])\/(19\d\d|20\d\d) (0?[1-9]|1[0-2]):[0-5]\d (AM|PM)"
+          />
+          <button onclick="setAlarm()">Alarmı Kur</button>
+        </div>
+      </div>
+      <div class="openAlarmList" id="openAlarmList">
+        <button
+          type="button"
+          class="btnClose"
+          id="btnClose"
+          onclick="closeAlarmList()"
+        >
+          <img class="imgClose" src="assets/close.png" alt="close" />
+        </button>
+        <div class="clockList">
+          <ul id="alarmList" class="hidden"></ul>
+          <!-- <button id="showMoreButton" onclick="toggleMoreAlarms()" >Daha Fazla</button> -->
+        </div>
+      </div>
+      <!-- Pop-up -->
+      <div id="overlay">
+        <div id="popup">
+          <div class="popupMessage" id="popupMessage"></div>
+          <button class="btnPopup" onclick="closePopup()">Kapat</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
