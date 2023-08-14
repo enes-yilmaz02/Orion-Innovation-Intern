@@ -1,0 +1,24 @@
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+}
+.block1{
+  margin-right:50px;
+}
+
+.block1,
+.block2 {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  width: 100%; /* veya dilediğiniz genişlik değeri */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
