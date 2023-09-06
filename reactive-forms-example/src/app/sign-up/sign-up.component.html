@@ -1,0 +1,74 @@
+<body>
+
+  <div class="container">
+    <div class="text-center">
+      <h1>Angular Reactive Form Example App</h1>
+    </div>
+    <div>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Register Form</legend>
+          <div class="form-group">
+            <label for="firstName">Name</label>
+            <input type="text" id="firstName" formControlName="firstName" placeholder="Enter Name"/>
+            <div *ngIf="submitted && formControl.firstName.errors" class="text-danger">
+              <div *ngIf="formControl.firstName.errors.required"> Name is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Surname</label>
+            <input type="text" id="lastName" formControlName="lastName" placeholder="Enter LastName"/>
+            <div *ngIf="submitted && formControl.lastName.errors" class="text-danger">
+              <div *ngIf="formControl.lastName.errors.required">Last Name is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" formControlName="email" placeholder="Enter E-mail"/>
+            <div *ngIf="submitted && formControl.email.errors" class="text-danger">
+              <div *ngIf="formControl.email.errors.required">Email is required.</div>
+              <div *ngIf="formControl.email.errors.pattern">
+                <ul>
+                  <li>Please enter a email </li>
+                  <li>Please enter a email in the format example@gmail.com</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" formControlName="phone" pattern="[0-9]*" placeholder="Enter Phone"/>
+            <div *ngIf="submitted && formControl.phone.errors" class="text-danger">
+              <div *ngIf="formControl.phone.errors.required">Phone is required.</div>
+              <div *ngIf="formControl.phone.errors.pattern">
+                <ul>
+                  <li>Please enter a phone number</li>
+                  <li>Please enter a number in the format (123) 456-7890</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 roundedTextBox mb-3">
+            <label>Password</label>
+            <input type="password" class="form-control mb-2" id="inputPassword" formControlName="password" placeholder="Enter Password">
+            <div *ngIf="submitted && formControl.password.errors" class="text-danger">
+              <div *ngIf="formControl.password.errors.required">Password is required.</div>
+              <div *ngIf="formControl.password.errors.pattern">
+                <ul>
+                  <li>Password should be alphanumeric</li>
+                  <li>A letter of the password should be capital</li>
+                  <li>Password must contain a special character (@, $, !, &, etc)</li>
+                  <li>Password length must be greater than 7 characters</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button type="submit">Register</button>
+          <a  routerLink="['sign-in']" >login</a>
+        </fieldset>
+      </form>
+
+    </div>
+  </div>
+
+</body>

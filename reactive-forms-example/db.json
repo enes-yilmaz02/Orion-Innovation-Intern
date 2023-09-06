@@ -1,0 +1,108 @@
+{
+  "users": [
+    {
+      "firstName": "enes",
+      "lastName": "Yilmaz",
+      "email": "ey684241@gmail.com",
+      "phone": "05313342209",
+      "password": "Enes.555",
+      "id": 1
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "en@gmail.com",
+      "phone": "05313342209",
+      "password": "enes.555",
+      "id": 2
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "en@gmail.com",
+      "phone": "05313342209",
+      "password": "enes.555",
+      "id": 3
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "ey684241@gmail.com",
+      "phone": "05313342209",
+      "password": "Enes.4444",
+      "id": 4
+    },
+    {
+      "firstName": "aziz",
+      "lastName": "tüllü",
+      "email": "aziz@gmail.com",
+      "phone": "0123456789",
+      "password": "Aziz.4545",
+      "id": 5
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "enesbenben101@hotmail.com",
+      "phone": "05313342209",
+      "password": "Enes.4545",
+      "id": 6
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "ey684241@gmail.com",
+      "phone": "05313342209",
+      "password": "Enes.555",
+      "id": 7
+    },
+    {
+      "firstName": "Enes",
+      "lastName": "Yilmaz",
+      "email": "ey684241@gmail.com",
+      "phone": "05313342209",
+      "password": "enes.555",
+      "id": 8
+    },
+    {
+      "firstName": "enes",
+      "lastName": "Yilmaz",
+      "email": "enes.yilmaz@orionic.com",
+      "phone": "05313342209",
+      "password": "1234567.E",
+      "id": 9
+    },
+    {
+      "firstName": "ali",
+      "lastName": "tüllü",
+      "email": "ali@gmail.com",
+      "phone": "1234567890",
+      "password": "ali.45E*",
+      "id": 10
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "enes@gmail.com",
+      "phone": "05313342209",
+      "password": "enes.555",
+      "id": 11
+    },
+    {
+      "firstName": "enes",
+      "lastName": "yilmaz",
+      "email": "enes123@gmail.com",
+      "phone": "05313342209",
+      "password": "Enes.555",
+      "id": 12
+    },
+    {
+      "firstName": "Enes",
+      "lastName": "yilmaz",
+      "email": "enes.yilmaz@orionic.com",
+      "phone": "05313342209",
+      "password": "12345enes.",
+      "id": 13
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>Angular Reactive Form Example App</h1>
+    </div>
+    <div>
+   <!-- Giriş Formu -->
+   <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+    <fieldset>
+      <legend>Login Form</legend>
+      <div class="form-group">
+        <label for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" formControlName="loginEmail" placeholder="E-mail"/>
+        <div *ngIf="submittedLogin && formControl.loginEmail.errors" class="text-danger">
+          <div *ngIf="formControl.loginEmail.errors.required">E-mail is required.</div>
+          <div *ngIf="formControl.loginEmail.errors.pattern">
+            <ul>
+              <li>Lütfen geçerli bir e-posta adresi girin.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" formControlName="loginPassword" placeholder="Password" />
+        <div *ngIf="submittedLogin && formControl.loginPassword.errors" class="text-danger">
+          <div *ngIf="formControl.loginPassword.errors.required">Password is required</div>
+        </div>
+      </div>
+      <button type="submit" (click)="login()">Login</button>
+      <a [routerLink]="['/sign-up']">Register</a>
+
+    </fieldset>
+  </form>
+    </div>
+  </div>
+
+</body>
