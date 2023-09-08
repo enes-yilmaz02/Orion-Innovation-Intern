@@ -24,5 +24,13 @@ export class AppComponent implements OnInit {
     observable.subscribe(data => {
       console.log(data);
     });
+
+    const observer = {
+      next: (x: any) => console.log('Observer got a next value: ' + x),
+      error: (err: any) => console.error('Observer got an error: ' + err),
+      complete: () => console.log('Observer got a complete notification'),
+    };
+
+    observable.subscribe(observer);
   }
 }
