@@ -79,6 +79,25 @@ export class AppComponent implements OnInit {
 
     subject2.next(3);
 
+    // ------------ ReplaySubject ----------------------
+    console.log("");
+    console.log("**** Replay subject *****");
 
+    const subject3 = new ReplaySubject(2); // buffer 3 values for new subscribers
+
+    subject.subscribe({
+      next: (v) => console.log(`observerA: ${v}`),
+    });
+
+    subject3.next(1);
+    subject3.next(2);
+    subject3.next(3);
+    subject3.next(4);
+
+    subject3.subscribe({
+      next: (v: any) => console.log(`observerB: ${v}`),
+    });
+
+    subject3.next(5);
   }
 }
