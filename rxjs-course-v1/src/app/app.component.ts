@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, from } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -99,5 +99,27 @@ export class AppComponent implements OnInit {
     });
 
     subject3.next(5);
+
+    // ------------ AsyncSubject ----------------------
+    console.log("");
+    console.log("**** Async subject *****");
+
+    const subject4 = new AsyncSubject();
+
+    subject.subscribe({
+      next: (v) => console.log(`observerA: ${v}`),
+    });
+
+    subject4.next(1);
+    subject4.next(2);
+    subject4.next(3);
+    subject4.next(4);
+
+    subject4.subscribe({
+      next: (v: any) => console.log(`observerB: ${v}`),
+    });
+
+    subject4.next(5);
+    subject4.complete();
   }
 }
