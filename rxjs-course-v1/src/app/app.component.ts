@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -121,5 +121,25 @@ export class AppComponent implements OnInit {
 
     subject4.next(5);
     subject4.complete();
+
+
+    // ------------ Subscription ----------------------
+
+    console.log("");
+    console.log("**** Subscription *****");
+    const observable3 = interval(400);
+    const observable4 = interval(300);
+
+    const subscription = observable3.subscribe((x: any) => console.log('first: ' + x));
+    const childSubscription = observable4.subscribe((x: any) => console.log('second: ' + x));
+
+    subscription.add(childSubscription);
+
+    setTimeout(() => {
+      // Unsubscribes BOTH subscription and childSubscription
+      subscription.unsubscribe();
+    }, 1000);
   }
+
+
 }
