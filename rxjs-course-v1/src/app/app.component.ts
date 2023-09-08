@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from, interval, map, of } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, interval, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -144,12 +144,23 @@ export class AppComponent implements OnInit {
     // ------------ OF - MAP ----------------------
 
     console.log("");
-    console.log("**** OF - MAP *****");
+    console.log("**** of - map *****");
     of(1, 2, 3)
       .pipe(map((x) => x * x))
       .subscribe((v) => console.log(`value: ${v}`));
 
+    // ------------ OF - FİRST ----------------------
+    console.log("");
+    console.log("**** of - first *****");
+
+    of(1, 2, 3)
+      .pipe(first())
+      .subscribe((v) => console.log(`value: ${v}`));
+
+
+
+
+
+
   }
-
-
 }
