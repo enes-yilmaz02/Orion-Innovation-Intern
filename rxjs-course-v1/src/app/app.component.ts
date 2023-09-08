@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from, interval } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, from, interval, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -139,6 +139,16 @@ export class AppComponent implements OnInit {
       // Unsubscribes BOTH subscription and childSubscription
       subscription.unsubscribe();
     }, 1000);
+
+
+    // ------------ OF - MAP ----------------------
+
+    console.log("");
+    console.log("**** OF - MAP *****");
+    of(1, 2, 3)
+      .pipe(map((x) => x * x))
+      .subscribe((v) => console.log(`value: ${v}`));
+
   }
 
 
