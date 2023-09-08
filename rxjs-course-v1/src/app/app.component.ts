@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, from } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, from } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // ------------ observable ----------------
+    console.log("");
+    console.log("***** observable *****");
+
+
     const observable = new Observable((subscriber) => {
       subscriber.next(1);
       subscriber.next(2);
@@ -25,6 +29,9 @@ export class AppComponent implements OnInit {
     });
 
     // ------------ observer ----------------
+    console.log("");
+    console.log(" ***** observer *****");
+
 
     const observer = {
       next: (x: any) => console.log('Observer got a next value: ' + x),
@@ -35,6 +42,9 @@ export class AppComponent implements OnInit {
     observable.subscribe(observer);
 
     // ------------ Subject ----------------------
+    console.log("");
+    console.log("***** subject *****");
+
 
     const subject = new Subject<number>();
 
@@ -48,5 +58,27 @@ export class AppComponent implements OnInit {
     const observable2 = from([1, 2, 3]);
 
     observable2.subscribe(subject);
+
+    // ------------ BehaviorSubject ----------------------
+    console.log("");
+    console.log("**** Behavior subject *****");
+
+
+    const subject2 = new BehaviorSubject(0); // 0 is the initial value
+
+    subject2.subscribe({
+      next: (v) => console.log(`observerA: ${v}`),
+    });
+
+    subject2.next(1);
+    subject2.next(2);
+
+    subject2.subscribe({
+      next: (v) => console.log(`observerB: ${v}`),
+    });
+
+    subject2.next(3);
+
+
   }
 }
