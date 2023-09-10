@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, interval, map, of } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, interval, map, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -123,22 +123,26 @@ export class AppComponent implements OnInit {
     subject4.complete();
 
 
-    // ------------ Subscription ----------------------
+    // // ------------ Subscription ----------------------
 
+    // console.log("");
+    // console.log("**** Subscription *****");
+    // const observable3 = interval(400);
+    // const observable4 = interval(300);
+
+    // const subscription = observable3.subscribe((x: any) => console.log('first: ' + x));
+    // const childSubscription = observable4.subscribe((x: any) => console.log('second: ' + x));
+
+    // subscription.add(childSubscription);
+
+    // setTimeout(() => {
+    //   // Unsubscribes BOTH subscription and childSubscription
+    //   subscription.unsubscribe();
+    // },1000);
+
+    // ************* Operators ****************
     console.log("");
-    console.log("**** Subscription *****");
-    const observable3 = interval(400);
-    const observable4 = interval(300);
-
-    const subscription = observable3.subscribe((x: any) => console.log('first: ' + x));
-    const childSubscription = observable4.subscribe((x: any) => console.log('second: ' + x));
-
-    subscription.add(childSubscription);
-
-    setTimeout(() => {
-      // Unsubscribes BOTH subscription and childSubscription
-      subscription.unsubscribe();
-    }, 1000);
+    console.log(" ***************** Operators ***************** ");
 
 
     // ------------ OF - MAP ----------------------
@@ -157,6 +161,27 @@ export class AppComponent implements OnInit {
       .pipe(first())
       .subscribe((v) => console.log(`value: ${v}`));
 
+    // ------------ FROM ----------------------
+    console.log("");
+    console.log("**** from *****");
+
+    const arrayfrom = [10, 20, 30];
+    const resultfrom = from(arrayfrom);
+
+    resultfrom.subscribe(x => console.log(x));
+
+    function* generateDoubles(seed: any) {
+      let i = seed;
+      while (true) {
+        yield i;
+        i = 2 * i; // double it
+      }
+    }
+
+    const iterator = generateDoubles(3);
+    const result = from(iterator).pipe(take(10));
+
+    result.subscribe(x => console.log(x));
 
 
 
