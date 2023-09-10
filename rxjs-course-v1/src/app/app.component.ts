@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, range, take } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -255,6 +255,18 @@ export class AppComponent implements OnInit {
     const resultgenerate = generate(0, x => x < 3, x => x + 1, x => x);
 
     resultgenerate.subscribe(x => console.log(x));
+
+
+    // ------------ range ----------------------
+    console.log("");
+    console.log("**** range *****");
+    const numbers = range(1, 3);
+
+    numbers.subscribe({
+      next: value => console.log(value),
+      complete: () => console.log('Complete!')
+    });
+
 
   }
 }
