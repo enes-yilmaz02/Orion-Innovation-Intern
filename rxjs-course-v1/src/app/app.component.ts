@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, fromEvent, interval, map, of, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -199,7 +199,23 @@ export class AppComponent implements OnInit {
     clicksInDocument.subscribe(() => console.log('document'));
     clicksInDiv.subscribe(() => console.log('div'));
 
+// ------------ FROMEVENTPattern ----------------------
+console.log("");
+console.log("**** fromEventPattern *****");
 
+    function addClickHandler(handler:any) {
+      document.addEventListener('click', handler);
+    }
+
+    function removeClickHandler(handler:any) {
+      document.removeEventListener('click', handler);
+    }
+
+    const clicks = fromEventPattern(
+      addClickHandler,
+      removeClickHandler
+    );
+    clicks.subscribe(x => console.log(x));
 
 
   }
