@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concat, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, of, range, take, throwError, timer } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concat, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, merge, of, range, take, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -317,14 +317,23 @@ export class AppComponent implements OnInit {
 
 
 
-// ------------ concat ----------------------
-console.log("");
-console.log("**** concat *****");
+    // ------------ concat ----------------------
+    console.log("");
+    console.log("**** concat *****");
 
-const timerconcat = interval(1000).pipe(take(4));
-const sequenceconcat = range(1, 10);
-const resultconcat = concat(timerconcat, sequenceconcat);
-resultconcat.subscribe(x => console.log(x));
+    const timerconcat = interval(1000).pipe(take(4));
+    const sequenceconcat = range(1, 10);
+    const resultconcat = concat(timerconcat, sequenceconcat);
+    resultconcat.subscribe(x => console.log(x));
+
+    // ------------ merge ----------------------
+    console.log("");
+    console.log("**** merge *****");
+
+    const clicksmerge = fromEvent(document, 'click');
+    const timermerge = interval(1000);
+    const clicksOrTimer = merge(clicksmerge, timermerge);
+    clicksOrTimer.subscribe(x => console.log(x));
   }
 }
 
