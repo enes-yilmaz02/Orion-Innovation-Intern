@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, range, take, throwError } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concatMap, first, from, fromEvent, fromEventPattern, generate, interval, map, of, range, take, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -287,6 +287,16 @@ export class AppComponent implements OnInit {
     errorWithTimestamp$.subscribe({
       error: err => console.log(err.timestamp, err.message)
     });
+
+    // ------------ timer - concatMap ----------------------
+    console.log("");
+    console.log("**** timer - concatMap *****");
+    // This could be any observable
+    const source = of(1, 2, 3);
+
+    timer(1000)
+      .pipe(concatMap(() => source))
+      .subscribe(console.log);
 
   }
 }
