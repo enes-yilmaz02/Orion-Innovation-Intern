@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, range, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, range, take, throwError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -267,6 +267,26 @@ export class AppComponent implements OnInit {
       complete: () => console.log('Complete!')
     });
 
+
+
+    // ------------ throwError ----------------------
+    console.log("");
+    console.log("**** throwError *****");
+    let errorCount = 0;
+
+    const errorWithTimestamp$ = throwError(() => {
+      const error: any = new Error(`This is error number ${++errorCount}`);
+      error.timestamp = Date.now();
+      return error;
+    });
+
+    errorWithTimestamp$.subscribe({
+      error: err => console.log(err.timestamp, err.message)
+    });
+
+    errorWithTimestamp$.subscribe({
+      error: err => console.log(err.timestamp, err.message)
+    });
 
   }
 }
