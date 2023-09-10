@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, catchError, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -233,6 +233,20 @@ export class AppComponent implements OnInit {
       next: (value: any) => console.log(value),
       error: (err: any) => console.log(err)
     });
+
+    // ------------ BİNDCALLBACK ----------------------
+    console.log("");
+    console.log("**** bindCallback *****");
+    function iCallMyCallbackSynchronously(cb: () => any) {
+      cb();
+    }
+
+    const boundSyncFn = bindCallback(iCallMyCallbackSynchronously);
+    const boundAsyncFn = bindCallback(iCallMyCallbackSynchronously, null!, asyncScheduler);
+
+    boundSyncFn().subscribe(() => console.log('I was sync!'));
+    boundAsyncFn().subscribe(() => console.log('I was async!'));
+    console.log('This happened...');
 
   }
 }
