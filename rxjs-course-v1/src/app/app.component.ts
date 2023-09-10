@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concat, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, merge, of, range, take, throwError, timer } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concat, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, merge, of, range, take, throwError, timer, zip } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -326,14 +326,27 @@ export class AppComponent implements OnInit {
     const resultconcat = concat(timerconcat, sequenceconcat);
     resultconcat.subscribe(x => console.log(x));
 
-    // ------------ merge ----------------------
-    console.log("");
-    console.log("**** merge *****");
+    // // ------------ merge ----------------------
+    // console.log("");
+    // console.log("**** merge *****");
 
-    const clicksmerge = fromEvent(document, 'click');
-    const timermerge = interval(1000);
-    const clicksOrTimer = merge(clicksmerge, timermerge);
-    clicksOrTimer.subscribe(x => console.log(x));
+    // const clicksmerge = fromEvent(document, 'click');
+    // const timermerge = interval(1000);
+    // const clicksOrTimer = merge(clicksmerge, timermerge);
+    // clicksOrTimer.subscribe(x => console.log(x));
+
+    // ------------ zip ----------------------
+    console.log("");
+    console.log("**** zip *****");
+
+    const age$ = of(27, 25, 29);
+    const name$ = of('Foo', 'Bar', 'Beer');
+    const isDev$ = of(true, true, false);
+
+    zip(age$, name$, isDev$).pipe(
+      map(([age, name, isDev]) => ({ age, name, isDev }))
+    )
+      .subscribe(x => console.log(x));
   }
 }
 
