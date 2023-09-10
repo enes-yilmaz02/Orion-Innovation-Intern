@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, of, range, take, throwError, timer } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, concat, concatMap, first, from, fromEvent, fromEventPattern, generate, iif, interval, map, of, range, take, throwError, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -311,12 +311,20 @@ export class AppComponent implements OnInit {
 
     subscribeToFirst = true;
     firstOrSecond.subscribe(value => console.log(value));
-
-
-
     subscribeToFirst = false;
     firstOrSecond.subscribe(value => console.log(value));
 
+
+
+
+// ------------ concat ----------------------
+console.log("");
+console.log("**** concat *****");
+
+const timerconcat = interval(1000).pipe(take(4));
+const sequenceconcat = range(1, 10);
+const resultconcat = concat(timerconcat, sequenceconcat);
+resultconcat.subscribe(x => console.log(x));
   }
 }
 
