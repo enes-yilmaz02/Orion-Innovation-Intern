@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
-
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, catchError, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -199,15 +199,15 @@ export class AppComponent implements OnInit {
     clicksInDocument.subscribe(() => console.log('document'));
     clicksInDiv.subscribe(() => console.log('div'));
 
-// ------------ FROMEVENTPattern ----------------------
-console.log("");
-console.log("**** fromEventPattern *****");
+    // ------------ FROMEVENTPattern ----------------------
+    console.log("");
+    console.log("**** fromEventPattern *****");
 
-    function addClickHandler(handler:any) {
+    function addClickHandler(handler: any) {
       document.addEventListener('click', handler);
     }
 
-    function removeClickHandler(handler:any) {
+    function removeClickHandler(handler: any) {
       document.removeEventListener('click', handler);
     }
 
@@ -217,6 +217,24 @@ console.log("**** fromEventPattern *****");
     );
     clicks.subscribe(x => console.log(x));
 
+    // ------------ AJAX ----------------------
+    console.log("");
+    console.log("**** ajax *****");
+
+    const obs$ = ajax('https://api.github.com/users?per_page=5').pipe(
+      map(userResponse => console.log('users: ', userResponse)),
+      catchError(error => {
+        console.log('error: ', error);
+        return of(error);
+      })
+    );
+
+    obs$.subscribe({
+      next: (value: any) => console.log(value),
+      error: (err: any) => console.log(err)
+    });
 
   }
 }
+
+
