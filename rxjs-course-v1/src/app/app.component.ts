@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, interval, map, of, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, first, from, fromEvent, interval, map, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -183,6 +183,21 @@ export class AppComponent implements OnInit {
 
     result.subscribe(x => console.log(x));
 
+
+    // ------------ FROMEVENT ----------------------
+    console.log("");
+    console.log("**** fromEvent *****");
+
+    const div = document.createElement('div');
+    div.style.cssText = 'width: 200px; height: 200px; background: #09c;';
+    document.body.appendChild(div);
+
+    // note optional configuration parameter which will be passed to addEventListener
+    const clicksInDocument = fromEvent(document, 'click', { capture: true });
+    const clicksInDiv = fromEvent(div, 'click');
+
+    clicksInDocument.subscribe(() => console.log('document'));
+    clicksInDiv.subscribe(() => console.log('div'));
 
 
 
