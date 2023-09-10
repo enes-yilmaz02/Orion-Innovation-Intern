@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, interval, map, of, take } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject, asyncScheduler, bindCallback, catchError, first, from, fromEvent, fromEventPattern, generate, interval, map, of, take } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 @Component({
   selector: 'app-root',
@@ -247,6 +247,14 @@ export class AppComponent implements OnInit {
     boundSyncFn().subscribe(() => console.log('I was sync!'));
     boundAsyncFn().subscribe(() => console.log('I was async!'));
     console.log('This happened...');
+
+
+    // ------------ generate ----------------------
+    console.log("");
+    console.log("**** generate *****");
+    const resultgenerate = generate(0, x => x < 3, x => x + 1, x => x);
+
+    resultgenerate.subscribe(x => console.log(x));
 
   }
 }
